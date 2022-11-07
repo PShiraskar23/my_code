@@ -1,0 +1,49 @@
+<script src="./react.development.js"></script>
+<script src="./babel.js"></script>
+<script src="./react-dom.development.js"></script>
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+    const B = (obj) => {
+
+        let locRef = React.createRef()
+        const fnClick = () => {
+            let loc = locRef.current.value
+            obj.f(loc)
+
+        }
+
+        return <div>
+            <h1>B :</h1>
+            <p>
+                <b>Location :</b>
+                <input type="text" ref={locRef} />
+            </p>
+            <button onClick={fnClick}>Send (Child to Parent)</button>
+        </div>
+    }
+
+    const A = (data) => {
+        return <div>
+            <h1>A :{data.n}</h1>
+        </div>
+    }
+
+    const App = () => {
+        let [name, setLoc] = React.useState("")
+
+        const getData = (data) => {
+            setLoc(data)
+        }
+
+        return <div>
+            <h1>App :</h1>
+            <A n={name} />
+            <B f={getData} />
+        </div>
+    }
+
+    ReactDOM.render(<App />, document.getElementById('root'))
+</script>

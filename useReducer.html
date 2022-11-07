@@ -1,0 +1,71 @@
+<script src="./react.development.js"></script>
+<script src="./babel.js"></script>
+<script src="./react-dom.development.js"></script>
+
+<div id="root"></div>
+
+<script type="text/babel">
+  
+    const App = () => {
+
+        let init = {
+            n1: 0,
+            n2: 0,
+            res: 0
+        }
+
+        let reducer = (state, action) => {
+            switch (action.type) {
+                case "UpdateN1":
+                    state = {
+                        ...state,
+                        n1: action.data
+                    }
+                    break;
+                case "UpdateN2":
+                    state = {
+                        ...state,
+                        n2: action.data
+                    }
+                    break;
+                case "UpdateRes":
+                    state = {
+                        ...state,
+                        res: action.data
+                    }
+                    break
+
+            }
+            return state
+        }
+
+        let [store,dispatch] = React.useReducer (reducer, init)
+        const fnClick = () => {
+            dispatch({
+                type:"UpdateRes",
+                data:Number(store.n1)+Number(store.n2)
+            })
+
+
+        }
+        return <div>
+            <h1>Add Two No.</h1>
+            <p>
+                <b>N1 : </b>
+                <input type="text" onChange={(e)=>{dispatch({type:"UpdateN1",data:e.target.value})}}/>
+            </p>
+            <p>
+                <b>N2 : </b>
+                <input type="text" onChange={(e)=>{dispatch({type:"UpdateN2",data:e.target.value})}}/>
+            </p>
+            <button onClick={fnClick}>Add</button>
+            <div>
+                <h2>Result : {store.res} </h2>
+            </div>
+        </div>
+    }
+
+    let root = ReactDOM.createRoot(document.getElementById('root'))
+    root.render(<App />)
+
+</script>

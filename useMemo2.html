@@ -1,0 +1,38 @@
+<script src="./react.development.js"></script>
+<script src="./babel.js"></script>
+<script src="./react-dom.development.js"></script>
+
+<div id="root"></div>
+
+<script type="text/babel">
+    const App = () => {
+
+        const [cnt, setCnt] = React.useState(0)
+        const [toggle, setToggle] = React.useState(false)
+
+        const fnClick = () => {
+            setCnt(cnt + 1)
+        }
+
+        const fnCheck = React.useMemo(() => {
+            for(let i=0;i<500000000;i++){}
+            return cnt%2==0 ? "Even" : "Odd"
+        },[])
+
+        return <div>
+            <h1>Count : {cnt} {fnCheck}</h1>
+            <button onClick={fnClick}>Increment Count</button>
+            <div>
+                {
+                    !toggle ? <button onClick={() => { setToggle(!toggle) }}>Show</button> : <button onClick={() => { setToggle(!toggle) }}>Hide</button>
+                }
+
+                {toggle === true && <h1>Hello World</h1>}
+            </div>
+        </div>
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'))
+    root.render(<App />)
+
+</script>

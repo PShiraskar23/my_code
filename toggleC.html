@@ -1,0 +1,30 @@
+<script src="./react.development.js"></script>
+<script src="./babel.js"></script>
+<script src="./react-dom.development.js"></script>
+
+<div id="root"></div>
+
+<script type="text/babel">
+    class App extends React.Component {
+        constructor() {
+            super();
+            this.state = {
+                show: true
+            }
+        }
+        toggle = () => {
+            this.setState({
+                show: !this.state.show
+            })
+        }
+        render() {
+            return <div>
+                {
+                    this.state.show?<h1>Hello World</h1> :null
+                }
+                <button onClick={this.toggle}>Toggle</button>
+            </div>
+        }
+    }
+    ReactDOM.render(<App />, document.getElementById('root'))
+</script>

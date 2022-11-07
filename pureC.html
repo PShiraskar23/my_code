@@ -1,0 +1,41 @@
+<script src="./react.development.js"></script>
+<script src="./babel.js"></script>
+<script src="./react-dom.development.js"></script>
+<link rel="stylesheet" href="/bootstrap.css">
+
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+class App extends React.PureComponent {
+    constructor() {
+        super();
+        this.state = {
+            data: 10
+        }
+    }
+
+    fnClick = () => {
+        this.setState({
+            data: 12    
+        })
+    }
+    render() {
+        console.log(this.state)
+        return <div>
+            <h3 className='text-danger text-start ms-3'>
+                This is Pure Component :{this.state.data}
+            </h3>
+            <button className='btn btn-success d-flex justify-content-start offset-1' onClick={this.fnClick}>
+                Update State
+            </button>
+        </div>
+    }
+
+}
+
+const root=ReactDOM.createRoot(document.getElementById("root"));
+root.render(<App/>)
+
+</script>

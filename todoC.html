@@ -1,0 +1,180 @@
+<script src="./react.development.js"></script>
+<script src="./babel.js"></script>
+<script src="./react-dom.development.js"></script>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .todo {
+        text-align: center;
+        background-color: burlywood;
+    }
+
+    .container {
+        display: flex;
+        height: 100vh;
+        width: 100vw;
+        justify-content: center;
+    }
+
+    .heading {
+        padding-top: 10px;
+        margin-bottom: 30px;
+    }
+
+    .todo_container {
+        width: 600px;
+        height: 500px;
+
+    }
+
+    .todo_input {
+        margin: 15px 20px;
+        width: 62%;
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+        outline: none;
+        font-size: 20px;
+        font-weight: 500;
+
+
+    }
+
+    .btn {
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+        outline: none;
+        font-size: 20px;
+        font-weight: 400;
+        background-color: rgb(122, 77, 45);
+        color: white;
+        cursor: pointer;
+
+    }
+
+    .btn:hover {
+        background-color: rgba(255, 255, 255, 0.6);
+        color: rgb(122, 77, 45);
+    }
+
+    .todo_list {
+        width: 500px;
+        height: 400px;
+        margin: auto;
+    }
+
+    .todo_item {
+        display: flex;
+        justify-content: space-between;
+        margin: 5px 10px;
+        padding: 5px 10px;
+        box-sizing: content-box;
+        width: calc(100% - 20px);
+        background-color: wheat;
+        border-radius: 10px;
+    }
+
+    .todos {
+        display: block;
+        text-decoration-style: none;
+        color: blue;
+        font-size: 20px;
+        font-weight: 600;
+        text-transform: capitalize;
+    }
+
+    .todo_btn {
+        padding: 5px;
+        border-radius: 5px;
+        border: none;
+        outline: none;
+        font-size: 15px;
+        font-weight: 400;
+        cursor: pointer;
+        color: white;
+        margin: 0 5px;
+    }
+
+    .doneBtn {
+        background-color: blue;
+
+    }
+
+    .deleteBtn {
+        background-color: red;
+
+    }
+</style>
+
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+    class App extends React.Component {
+        constructor() {
+            super();
+            this.todoRef = React.createRef()
+            this.state = {
+                todo: "",
+                todoArr:[]
+            }
+        }
+
+        addTodo = () => {
+            let todoValue = this.todoRef.current.value
+            this.setState({
+                todo: todoValue,
+                todoArr:[...this.state.todo]
+            })
+            console.log(this.state.todoArr)
+
+        }
+        doneTodo = (eve) => {
+            this.setState({
+                
+            })
+                alert("done")
+
+            }
+            deleteTodo = () => {
+                alert("delete")
+            }
+        render() {
+            return <div className="todo">
+                <h1 className='heading'>Todo App</h1>
+                <div className="container">
+                    <div className='todo_container'>
+
+                        <div className="add_todo">
+                            <input type="text" className="todo_input" ref={this.todoRef} />
+                            <button className="btn" onClick={this.addTodo}>Add Todo</button>
+                        </div>
+                        <ul className="todo_list">
+
+                            <div className="todo_item">
+                                 <li className="todos">{this.state.todo}</li> 
+                                <div>
+                                    <button onClick={this.doneTodo} className="doneBtn todo_btn">Done </button>
+                                    <button onClick={this.deleteTodo} className="deleteBtn todo_btn">Delete </button>
+                                </div>
+                            </div>
+
+
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+
+        }
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById("root"))
+    root.render(<App />)
+</script>

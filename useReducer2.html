@@ -1,0 +1,116 @@
+<script src="./react.development.js"></script>
+<script src="./react-dom.development.js"></script>
+<script src="./babel.js"></script>
+
+<div id="root"></div>
+<script type="text/babel">
+
+    let ctx = React.createContext()
+
+    const initialState = {
+        name: "",
+        loc: ""
+    }
+
+    const reducer = (state, action) => {
+        switch (action.type) {
+            case 'UpdateName':
+                state = {
+                    ...state,
+                    name: action.data
+                }
+                break;
+            case 'UpdateLoc':
+                state = {
+                    ...state,
+                    loc: action.data
+                }
+                break;
+        }
+        return state
+
+    }
+
+
+    const App = () => {
+        const [newState, dispatch] = React.useReducer(reducer, initialState)
+
+        return <div>
+            <h1>App</h1>
+            <ctx.Provider value={[newState,dispatch]}>
+                <A />
+                <B />
+                <C />
+                <D />
+            </ctx.Provider>
+
+        </div>
+    }
+
+    const A = () => {
+        let [newState,dispatch]=React.useContext(ctx)
+        let nameRef = React.useRef()
+        
+        const fnClick = () => {
+        let name = nameRef.current.value
+            dispatch({
+                type:"UpdateName",
+                data:name
+            })
+
+        }
+
+        return <div>
+            <h1>A</h1>
+            <p>
+                <b>Name : </b> <input type="text" ref={nameRef}  />
+            </p>
+            <button onClick={fnClick}>Send</button>
+        </div>
+    }
+
+    const B = () => {
+        let [newState,dispatch]=React.useContext(ctx)
+        let locRef = React.useRef()
+
+        const fnClick = () => {
+        let loc = locRef.current.value
+            dispatch({
+                type:"UpdateLoc",
+                data:loc
+            })
+
+        }
+        return <div>
+            <h1>B</h1>
+            <p>
+                <b>Location : </b> <input type="text" ref={locRef}/>
+            </p>
+            <button onClick={fnClick} >Send</button>
+        </div>
+    }
+
+    const C = () => {
+        let [newState,dispatch]=React.useContext(ctx)
+
+        return <div>
+            <h1>C</h1>
+            <h3>Name : {newState.name} </h3>
+
+        </div>
+    }
+
+    const D = () => {
+        let [newState,dispatch]=React.useContext(ctx)
+
+        return <div>
+            <h1>D</h1>
+            <h3>Location : {newState.loc} </h3>
+        </div>
+    }
+
+
+    const root = ReactDOM.createRoot(document.getElementById('root'))
+    root.render(<App />)
+
+</script> 

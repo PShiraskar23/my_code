@@ -1,0 +1,50 @@
+<script src="./react.development.js"></script>
+<script src="./babel.js"></script>
+<script src="./react-dom.development.js"></script>
+
+<style>
+    .box {
+        height: 100px;
+        line-height: 100px;
+        width: 100px;
+        border: 2px solid red;
+        text-align: center;
+        color: blue;
+        font-size: 20px;
+        font-weight: bold;
+        display: inline-block;
+
+    }
+</style>
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+    class Box extends React.Component {
+  
+        render() {
+            return <span class="box"> {this.props.n} </span>
+        }
+    };
+
+    class App extends React.Component {
+        render() {
+            return <div>
+                <div>
+                    <Box n="1"/>
+                    <Box n="2"/>
+                </div>
+                <div>
+                    <Box n="3"/>
+                    <Box n="4"/>
+                </div>
+
+            </div>
+        }
+    }
+
+    ReactDOM.render(<App />, document.getElementById('root'))
+
+</script>
+

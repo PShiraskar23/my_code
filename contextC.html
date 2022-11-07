@@ -1,0 +1,100 @@
+<script src="./react.development.js"></script>
+<script src="./babel.js"></script>
+<script src="./react-dom.development.js"></script>
+
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+    const ctx = React.createContext();
+
+    class App extends React.Component {
+        constructor() {
+            super();
+            this.num = 100;
+        }
+
+        render() {
+            return <div>
+                <h1>App</h1>
+                <ctx.Provider value={this.num}>
+                    <A />
+                    <B />
+                </ctx.Provider>
+            </div>
+        }
+    }
+
+    class A extends React.Component {
+        render() {
+            return <div>
+                <h1>A </h1>
+                <P />
+            </div>
+        }
+    }
+
+    class P extends React.Component {
+        render() {
+            return <div>
+                <h1>P :</h1>
+                <Q />
+            </div>
+        }
+    }
+
+    class Q extends React.Component {
+        render() {
+            return <div>
+                <h1>Q :</h1>
+                <R />
+            </div>
+        }
+    }
+
+    class R extends React.Component {
+        render() {
+            return <div>
+                <h1>R : <ctx.Consumer>
+                    {
+                        (data) => {
+                            return <span>{data}</span>
+                        }
+                    }
+                </ctx.Consumer>
+                </h1>
+
+            </div>
+        }
+    }
+
+    class B extends React.Component {
+        render() {
+            return <div>
+                <h1>B</h1>
+                <Y />
+            </div>
+        }
+    }
+
+    class Y extends React.Component {
+        render() {
+            return <div>
+                <h1>Y :</h1>
+                <Z />
+            </div>
+        }
+    }
+
+    class Z extends React.Component {
+        render() {
+            return <div>
+                <h1>Z :{this.context}</h1>
+            </div>
+        }
+    }
+    Z.contextType = ctx
+
+    ReactDOM.render(<App />, document.getElementById("root"))
+</script>

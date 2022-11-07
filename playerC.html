@@ -1,0 +1,28 @@
+<script src="./react.development.js"></script>
+<script src="./babel.js"></script>
+<script src="./react-dom.development.js"></script>
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+    class Player extends React.Component{
+        render(){
+            return <div>
+                <h1>Hello this is {this.props.name} and i am from {this.props.loc}.My score is {this.props.runs}.</h1>
+                </div>
+        }
+    };
+
+    class App extends React.Component{
+        render(){
+            return <div>
+                <Player name="Sachin" loc="Mumbai" runs="20000"/>
+                <Player name="Dhoni" loc="Ranchi" runs="15000"/>
+                <Player name="Kohli" loc="Delhi" runs="10000"/>
+            </div>
+        }
+    };
+    ReactDOM.render(<App/>,document.getElementById('root'))
+
+</script>

@@ -1,0 +1,44 @@
+<script src="./react.development.js"></script>
+<script src="./babel.js"></script>
+<script src="./react-dom.development.js"></script>
+
+<div id="root"></div>
+
+<script type="text/babel">
+    class App extends React.Component {
+        constructor() {
+            super();
+            this.dataObj = {}
+        }
+
+        fnChange = (eve) => {
+            this.dataObj[eve.target.name] = eve.target.value
+
+        }
+
+        fnClick = () => {
+            console.log(this.dataObj)
+        }
+
+        render() {
+            return <div>
+                <h1 >Uncontrolled Component</h1>
+
+                <div>
+                    <p>
+                        <b>Username : </b>
+                        <input name="username" onChange={this.fnChange} type="text" />
+                    </p>
+                    <p>
+                        <b>Password : </b>
+                        <input name="password" onChange={this.fnChange} type="password" />
+                    </p>
+                    <button onClick={this.fnClick}>Submit</button>
+                </div>
+            </div>
+        }
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'))
+    root.render(<App />)
+</script>

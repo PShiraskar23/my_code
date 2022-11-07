@@ -1,0 +1,46 @@
+<script src="./react.development.js"></script>
+<script src="./babel.js"></script>
+<script src="./react-dom.development.js"></script>
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+    const App = () => {
+
+        let [name,setData]=React.useState("Not Yet Recieved")
+
+        const getData=(data)=>{
+            setData(data)
+        }
+
+        return <div>
+            <h1>App :{name}</h1>
+            <A f={getData}/>
+        </div>
+    }
+
+    const A = (obj) => {
+        let nameRef = React.useRef()
+
+        const fnClick = (eve) => {
+            let name = nameRef.current.value
+            obj.f(name)
+
+        }
+
+        return <div>
+            <h1>A :</h1>
+            <p>
+                <b>Name : </b>
+                <input type="text" ref={nameRef} />
+            </p>
+            <button onClick={fnClick}>Send (Child to Parent)</button>
+
+        </div>
+
+    }
+
+    ReactDOM.render(<App />, document.getElementById("root"))
+
+</script>

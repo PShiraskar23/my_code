@@ -1,0 +1,33 @@
+<script src="./react.development.js"></script>
+<script src="./babel.js"></script>
+<script src="./react-dom.development.js"></script>
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+    const App=()=> {
+        const [cnt, setCnt] = React.useState(0)
+        const [data, setData] = React.useState(100)
+        console.log("app rendering")
+        return <div>
+            <h1>This is Memo component :{cnt}</h1>
+            <button onClick={() => { setCnt(cnt+1) }}>Update Count</button><br /><br />
+            <button onClick={() => { setData(data + 1) }}>Update Count</button>
+            <Child data={data} />
+        </div>
+    }
+
+    function Child(prop) {
+        console.log("child rendering")
+        return <div>
+            <h1>This is Child component :{prop.data}</h1>
+        </div>
+    }
+
+    Child = React.memo(Child)
+
+    const root = ReactDOM.createRoot(document.getElementById('root'))
+    root.render(<App />)
+
+</script>

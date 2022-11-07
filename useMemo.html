@@ -1,0 +1,52 @@
+<script src="./react.development.js"></script>
+<script src="./babel.js"></script>
+<script src="./react-dom.development.js"></script>
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+    function App() {
+        let [cnt, setCnt] = React.useState(0)
+        let [val, setVal] = React.useState(100)
+
+        const fnClick = () => {
+            setCnt(cnt + 1)
+        }
+
+        const fnVal = () => {
+            setVal(val + 1)
+        }
+        return <div>
+            <h1>App Component and Count :{cnt}</h1>
+            <button onClick={fnClick}>Submit</button>
+            <br />
+            <br />
+            <Child val={val} />
+            <button onClick={fnVal}>Submit</button>
+
+        </div>
+    }
+
+    function Child(prop) {
+        console.log("Child Calling")
+
+        let getCount = React.useMemo(() => {
+            let count = 0;
+            for (let i = 0; i < 5000000000; i++) {
+                count++;
+            }
+            return count
+
+        },[])
+        return <div>
+            <h1>Child Component and Count :{prop.val}</h1>
+            <h1>Function Count :{getCount}</h1>
+        </div>
+    }
+
+    Child = React.memo(Child)
+
+    const root = ReactDOM.createRoot(document.getElementById('root'))
+    root.render(<App />)
+</script>

@@ -1,0 +1,46 @@
+<script src="./react.development.js"></script>
+<script src="./babel.js"></script>
+<script src="./react-dom.development.js"></script>
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+    function App() {
+        let [cnt, setCnt] = React.useState(0)
+        let [cnt2, setCnt2] = React.useState(0)
+        let [name, setName] = React.useState("")
+
+        const updateCount = React.useCallback(() => {
+            setCnt2(cnt2 + 1)
+        },[cnt2])
+
+
+        return <div>
+            <h1>App Component and Count :{cnt}</h1>
+            <button onClick={()=>{setCnt(cnt+1)}}>Submit</button>
+            <br />
+            <br />
+            <input type="text" onChange={(e)=>{setName(e.target.value)}}/>
+            <br />
+            <br />
+            <Child cnt={cnt2} func={updateCount} />
+        </div>
+    }
+
+    function Child(prop) {
+        console.log("Child Calling")
+
+        return <div>
+            <h1>Child Component and Count :{prop.cnt}</h1>
+            <h1>Function Count </h1>
+            <button onClick={prop.func}>Click Me</button>
+        </div>
+    }
+
+    Child = React.memo(Child)
+
+    const root = ReactDOM.createRoot(document.getElementById('root'))
+    root.render(<App />)
+
+</script>

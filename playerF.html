@@ -1,0 +1,28 @@
+<script src="./react.development.js"></script>
+<script src="./babel.js"></script>
+<script src="./react-dom.development.js"></script>
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+    const Player = (info) => {
+        return <div>
+            <h1>Hello this is {info.name} and i am from {info.loc}. My score is {info.runs}.
+            </h1>
+
+        </div>
+    };
+
+    const App = () => {
+        return <div>
+            <Player name="Sachin" loc="Mumbai" runs="20000" />
+            <Player name="Dhoni" loc="Ranchi" runs="15000" />
+            <Player name="Kohli" loc="Delhi" runs="10000" />
+
+        </div>
+    }
+
+    ReactDOM.render(<App />, document.getElementById("root"));
+
+</script>

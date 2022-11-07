@@ -1,0 +1,32 @@
+<script src="./react.development.js"></script>
+<script src="./babel.js"></script>
+<script src="./react-dom.development.js"></script>
+
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+    class App extends React.Component {
+
+        render() {
+            let firstName = "Sachin"
+
+            return <div>
+                <h1>App :</h1>
+                <A name={firstName} />
+            </div>
+        }
+    }
+
+    class A extends React.Component {
+        render() {
+            return <div>
+                <h1>A : {this.props.name}</h1>
+            </div>
+        }
+    }
+
+
+    ReactDOM.render(<App />, document.getElementById("root"))
+</script>

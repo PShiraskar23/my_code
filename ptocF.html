@@ -1,0 +1,25 @@
+<script src="./react.development.js"></script>
+<script src="./babel.js"></script>
+<script src="./react-dom.development.js"></script>
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+    const App = () => {
+
+        return <div>
+            <h1>App : </h1>
+            <A name="Dhoni" />
+        </div>
+    }
+
+    const A = (obj) => {
+        
+        return <h1>A : {obj.name} </h1>
+
+    }
+
+    ReactDOM.render(<App />, document.getElementById("root"))
+
+</script>

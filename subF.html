@@ -1,0 +1,37 @@
+<script src="./react.development.js"></script>
+<script src="./babel.js"></script>
+<script src="./react-dom.development.js"></script>
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+    function App() {
+        let n1Ref = React.createRef()
+        let n2Ref = React.createRef()
+        let h1Ref = React.createRef()
+
+        const add = () => {
+
+            let n1 = n1Ref.current.value
+            let n2 = n2Ref.current.value
+            let h1 = h1Ref.current
+            let res = Number(n1) - Number(n2)
+            h1.innerText = res
+                      
+        }
+
+        return <div>
+            <div>
+                <b>Number 1:</b> <input type="text" ref={n1Ref} /><br /><br />
+            </div>
+            <div>
+                <b>Number 2:</b> <input type="text" ref={n2Ref} /><br /><br />
+            </div>
+            <button onClick={add}>Substarct</button>
+            <h1>Result : <b ref={h1Ref}>0</b></h1>
+        </div>
+    }
+
+    ReactDOM.render(<App />, document.getElementById('root'))
+</script>

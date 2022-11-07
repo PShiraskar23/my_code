@@ -1,0 +1,55 @@
+<script src="./react.development.js"></script>
+<script src="./babel.js"></script>
+<script src="./react-dom.development.js"></script>
+
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+    class App extends React.Component {
+        constructor(){
+            super();
+            this.state={
+                name:"Not Yet Recieved"
+            }
+        }
+
+        getData=(data)=>{
+            this.setState({
+                name:data
+            })
+  
+        }
+        render() {
+            return <div>
+                <h1>App : {this.state.name}</h1>
+                <A f={this.getData}/>
+            </div>
+        }
+    }
+
+    class A extends React.Component {
+        nameRef=React.createRef()
+
+        fnClick=()=>{
+            let name=this.nameRef.current.value
+            this.props.f(name)
+            
+        }
+        render() {
+            return <div>
+                <h1>A :</h1>
+                <p>
+                    <b>Name : </b>
+                    <input type="text" ref={this.nameRef}/>
+                </p>
+                <button onClick={this.fnClick}>Send (Child to Parent)</button>
+
+            </div>
+        }
+    }
+
+
+    ReactDOM.render(<App />, document.getElementById("root"))
+</script>

@@ -1,0 +1,91 @@
+<script src="./react.development.js"></script>
+<script src="./babel.js"></script>
+<script src="./react-dom.development.js"></script>
+
+<div id="root"></div>
+
+<script type="text/babel">
+        
+        let ctx=React.createContext();
+
+    const App = () => {
+        let nameRef = React.useRef();
+        let [name, setName] = React.useState("")
+
+        const fnClick = () => {
+            let name = nameRef.current.value
+            setName(name)
+
+        }
+
+        return <div>
+            <h1>App :</h1>
+            <p>
+                <b>Name :</b> <input type="text" ref={nameRef} />
+            </p>
+            <button onClick={fnClick}>Send</button>
+
+            <ctx.Provider value={name}>
+                <A />
+                <B />
+            </ctx.Provider>
+        </div>
+    }
+
+    const A = () => {
+        return <div>
+            <h1>A :</h1>
+            <P />
+        </div>
+    }
+
+    const P = () => {
+        return <div>
+            <h1>P :</h1>
+            <Q />
+        </div>
+    }
+
+    const Q = () => {
+        return <div>
+            <h1>Q :<ctx.Consumer>
+                {
+                    (data)=>{
+                        return <span>{data}</span>
+                    }
+                }
+                </ctx.Consumer>
+                </h1>
+            <R />
+        </div>
+    }
+
+    const R = () => {
+        return <div>
+            <h1>R :</h1>
+        </div>
+    }
+
+    const B = (obj) => {
+        return <div>
+            <h1>B </h1>
+            <Y />
+        </div>
+    }
+
+    const Y = () => {
+        return <div>
+            <h1>Y :</h1>
+            <Z />
+        </div>
+    }
+
+    const Z = () => {
+        let data=React.useContext(ctx);
+        return <div>
+            <h1>Z :{data}</h1>
+        </div>
+    }
+
+    ReactDOM.render(<App />, document.getElementById('root'))
+</script>

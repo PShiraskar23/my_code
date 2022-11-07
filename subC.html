@@ -1,0 +1,47 @@
+<script src="./react.development.js"></script>
+<script src="./babel.js"></script>
+<script src="./react-dom.development.js"></script>
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+    class App extends React.Component {
+
+        n1Ref = React.createRef();
+        n2Ref = React.createRef();
+        h1Ref = React.createRef();
+
+        add = () => {
+            let n1 = this.n1Ref.current.value
+            let n2 = this.n2Ref.current.value
+            let h1 = this.h1Ref.current
+            let res = parseInt(n1) - Number(n2)
+            h1.innerText = res
+
+            if (res > 100) {
+                h1.style.color = "red"
+            } else if (res < 0) {
+                h1.style.color = "cyan"
+            }
+            else {
+                h1.style.color = "blue"
+            }
+        }
+
+        render() {
+            return <div>
+                <p>
+                    <b>No.1</b> <input type="text" ref={this.n1Ref} />
+                </p>
+                <p>
+                    <b>No.2</b> <input type="text" ref={this.n2Ref} />
+                </p>
+                <button onClick={this.add}>Substract</button>
+                <h1>Result : <b ref={this.h1Ref} >0</b></h1>
+            </div>
+        }
+    }
+
+    ReactDOM.render(<App />, document.getElementById('root'))
+</script>

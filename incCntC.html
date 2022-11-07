@@ -1,0 +1,36 @@
+<script src="./react.development.js"></script>
+<script src="./babel.js"></script>
+<script src="./react-dom.development.js"></script>
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+class App extends React.Component{
+    constructor(){
+        super();
+        this.state={
+            cnt:0,
+            name:"Sachin"
+        }
+    }
+
+    incCount=()=>{
+        this.setState({
+            cnt:this.state.cnt+1,
+            name:"Dhoni"
+        })
+    }
+
+    render(){
+        console.log("render called")
+        return <div>
+            <h1>Count : {this.state.cnt}</h1>
+            <h1>Hello this is {this.state.name}</h1>
+            <button onClick={this.incCount}>Increment Count</button>
+            </div>
+    }
+}
+
+ReactDOM.render(<App />,document.getElementById("root"))
+</script> 

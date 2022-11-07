@@ -1,0 +1,40 @@
+<script src="./react.development.js"></script>
+<script src="./babel.js"></script>
+<script src="./react-dom.development.js"></script>
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+class App extends React.PureComponent{
+     state={
+                cnt:0,
+                data:100
+            }
+        render(){
+           console.log("app rendering")
+        return <div>
+            <h1>This is Memo component :{this.state.cnt}</h1>
+            <button onClick={()=>{this.setState({cnt:this.state.cnt+1})}}>Update Count</button><br/><br/>
+            <button onClick={()=>{this.setState({data:this.state.data+1})}}>Update Count</button>
+            <Child data={this.state.data}/>
+            </div>
+    }
+}
+
+    class Child extends React.Component{
+        render(){
+            console.log("child rendering")
+
+            return <div>
+                <h1>This is Child component :{this.props.data}</h1>
+                </div>
+            }
+        }
+
+    Child=React.memo(Child) 
+    
+    const root=ReactDOM.createRoot(document.getElementById('root'))
+    root.render(<App/>)
+    
+</script>

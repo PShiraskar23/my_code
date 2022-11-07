@@ -1,0 +1,38 @@
+<script src="./react.development.js"></script>
+<script src="./babel.js"></script>
+<script src="./react-dom.development.js"></script>
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+    const useIncrement=(init) => {
+        const [cnt, setCnt] = React.useState(init)
+        
+        const IncCnt = () => {
+            setCnt(cnt + 1)
+        }
+        return [cnt,IncCnt]
+    }
+
+    const BtnCount=(prop)=>{
+        const [cnt,IncCnt]=useIncrement(0)
+        return  <button onClick={IncCnt}>Click me {cnt} time(s)</button>
+    }
+
+    const MouseOver=()=>{
+        const [cnt,IncCnt]=useIncrement(20)
+        return  <h1 onMouseOver={IncCnt}>Hover on me {cnt} time(s)</h1>
+    }
+
+    const App = () => {
+        return <div>
+            <BtnCount/>
+            <MouseOver/>
+        </div>
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'))
+    root.render(<App />)
+
+</script>

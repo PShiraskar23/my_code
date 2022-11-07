@@ -1,0 +1,57 @@
+<script src="./react.development.js"></script>
+<script src="./babel.js"></script>
+<script src="./react-dom.development.js"></script>
+
+<div id="root"></div>
+
+<script type="text/babel">
+    class App extends React.Component {
+        constructor() {
+            super();
+            // console.log("constructor called")
+            this.state = {
+                cnt: 0
+            }
+        }
+
+
+
+        static getDerivedStateFromProps() {
+            console.log("getDerivedStateFromProps called")
+            return null
+        }
+
+        shouldComponentUpdate() {
+            console.log("shouldComponentUpdate called")
+            return true;
+        }
+
+        componentDidUpdate() {
+            console.log("componentDidUpdate called")
+
+        }
+
+        getSnapshotBeforeUpdate() {
+            console.log("getSnapshotBeforeUpdate called")
+            return null
+        }
+
+        fnClick = () => {
+            this.setState({
+                cnt: this.state.cnt + 1
+            })
+
+        }
+
+        render() {
+            console.log("render called")
+            return <div>
+                <h1>App : {this.state.cnt}</h1>
+                <button onClick={this.fnClick}>Inc</button>
+            </div>
+        }
+
+    }
+    const root = ReactDOM.createRoot(document.getElementById('root'))
+    root.render(<App />)
+</script>

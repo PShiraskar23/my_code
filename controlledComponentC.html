@@ -1,0 +1,50 @@
+<script src="./react.development.js"></script>
+<script src="./babel.js"></script>
+<script src="./react-dom.development.js"></script>
+<link rel="stylesheet" href="./bootstrap.css">
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+    class App extends React.Component {
+        usernameRef = React.createRef()
+        passwordRef = React.createRef()
+
+        state = {
+            username: "",
+            password: ""
+        }
+
+        fnClick = () => {
+            console.log(this.state)
+
+        }
+        render() {
+            return <div>
+                <h1 className="text-center">Controlled Component</h1>
+                <div>
+                    <p> 
+                        <b>Username : </b>
+                        <input type="text" onChange={(eve) => {
+                            this.setState({
+                                username: eve.target.value
+                            })
+                        }} ref={this.usernameRef} />
+                    </p>
+                    <p>
+                        <b>Password : </b>
+                        <input type="password" onChange={(eve) => {
+                            this.setState({
+                                password: eve.target.value
+                            })
+                        }} ref={this.passwordRef} />
+                    </p>
+                    <button onClick={this.fnClick} className="btn btn-primary ms-4">Submit</button>
+                </div>
+            </div>
+        }
+    }
+    const root = ReactDOM.createRoot(document.getElementById("root"))
+    root.render(<App />)
+</script>
